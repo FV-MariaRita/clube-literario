@@ -1,0 +1,45 @@
+CREATE DATABASE clubeliterario;
+CREATE TABLE usuarios (
+	id integer not null AUTO_INCREMENT,
+	nomedeusuario varchar(20) not null UNIQUE,
+	nome varchar(100) not null,
+	dataNasc date not null, 
+	email varchar(100) not null UNIQUE,
+	senha varchar(255) not null,
+	data_cadastro datetime not null DEFAULT CURRENT_TIMESTAMP,
+    foto_path varchar(500) not null,
+	livros_lidos int not null DEFAULT 0,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE livro (
+	id integer not null AUTO_INCREMENT,
+	nome varchar (500) not null UNIQUE,
+	genero varchar(150) not null,
+	autor varchar(500) not null,
+	ano integer not null,
+	numPaginas integer not null,
+	ISBN varchar(100) not null,
+    nacionalidade varchar(50) not null, 
+    sinopse varchar(10000) not null,
+	qtdvisualizacoes integer not null, 
+	capa_path varchar(200) not null,
+	livro_path varchar(200) not null, 
+	data_upload datetime not null DEFAULT CURRENT_TIMESTAMP, 
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE leitura (
+	idLivro integer not null,
+    idUsuario integer not null,
+    PRIMARY KEY (idLivro, idUsuario),
+    FOREIGN KEY (idLivro) REFERENCES livro(id),
+    FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
+);
+
+INSERT INTO usuarios (nomedeusuario, nome, dataNasc, email, senha, foto_path) VALUES ('mari.lima', 'Mariana', '2007-08-04', 'mariana@email.com', md5('0408'), './images/profile picture.jpg');
+INSERT INTO usuarios (nomedeusuario, nome, dataNasc, email, senha, foto_path) VALUES ('vargas.rita', 'Maria Rita', '2007-12-13', 'mariarita@email.com', md5('1312'), './images/profile picture.jpg');
+ 
+
+INSERT INTO livro (nome, genero, autor, ano, numPaginas, ISBN, nacionalidade, sinopse, qtdvisualizacoes, capa_path, livro_path) VALUES (); 
+
